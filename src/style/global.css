@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,700&display=swap');
+
+body{
+    overflow-x: hidden;
+    font-family: 'Poppins';
+}
+.mt-page{
+    margin-top: 90px;
+}
