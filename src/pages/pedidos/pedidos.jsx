@@ -41,7 +41,7 @@ function Pedidos(){
                 </div>
             </div>
             <div className="mt-5 ms-4 me-4">
-                <table className="table">
+                <table className="table table-responsive">
                     <thead>
                         <tr>
                         <th scope="col">Pedido</th>
