@@ -1,7 +1,10 @@
 import Navbar from "../../components/navbar/navbar.jsx";
 import "./pedido-editar.css"
 import {Link} from "react-router-dom";
+import{useState} from "react";
+import {v4 as uuidv4} from "uuid"
 function PedidoEditar(){
+
     const lista_clientes = [
         {
             id_cliente: 1,
@@ -22,7 +25,7 @@ function PedidoEditar(){
             cod: "45 Dias"
         }
     ];
-    const produtos = [
+    const [produtos, setProdutos] = useState([
         {
             id_item: 1,
             id_produto: 1,
@@ -39,7 +42,8 @@ function PedidoEditar(){
             vl_uni: 300,
             vl_total: 600
         }
-    ];
+    ]);
+    
     const lista_produtos = [
         {
             id_item: 1,
@@ -53,6 +57,26 @@ function PedidoEditar(){
         }
     ];
     const valor_total = 5000;
+    function AdicionarProduto(){
+        const prod = {
+            id_item: uuidv4(),
+            id_produto: 0,
+            descricao: "",
+            qtd: 2,
+            vl_uni: 0,
+            vl_total: 0
+        };
+        setProdutos([...produtos, prod]);
+    }
+    function ExcluirProduto(id_item){
+        const prod = [];
+        produtos.map((p) => {
+            if(p.id_item !== id_item){
+                prod.push(p);
+            }
+        });
+        setProdutos(prod);
+    }
     return <>
         <Navbar />
         <div className="container-fluid mt-page form-pedido-editar">
@@ -130,16 +154,21 @@ function PedidoEditar(){
                                         <td><input type="text" className="form-control"/></td>
                                         <td><input type="text" className="form-control"/></td>
                                         <td><input type="text" className="form-control" disabled/></td>
-                                        <td><button type="button" className="btn btn-danger"><i className="bi bi-trash3-fill"></i></button></td>
+                                        <td><button type="button" className="btn btn-danger" onClick={(e) => ExcluirProduto(produto.id_item)}><i className="bi bi-trash3-fill"></i></button></td>
                                     
                                     </tr>
                                 })
                             }
                         </tbody>
                     </table>
+                    {
+                        produtos.length === 0 ? <div className="no-item">
+                            Nunhum produto cadastrado!
+                            </div> : null
+                    }
                 </div>
                 <div className="col-md-6 ">
-                    <button type="button" className="btn btn-sm btn-primary">Adicionar produto</button>
+                    <button type="button" className="btn btn-sm btn-primary" onClick={AdicionarProduto}>Adicionar produto</button>
                 </div>
                 <div className="col-md-6 text-end mb-5">
                     <span className="me-4">Total Pedido:</span>
