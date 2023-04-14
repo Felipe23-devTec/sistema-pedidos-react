@@ -2,25 +2,33 @@ import Navbar from "../../components/navbar/navbar.jsx";
 import {Link} from "react-router-dom";
 import "./pedidos.css";
 import Pedido from "../../components/pedido/pedido.jsx"
+import { useEffect, useState } from "react";
 function Pedidos(){
-    const pedidos = [
-        {
-            "id_pedido": 1,
-            "cliente": "Marcos",
-            "dt_pedido": "2023-03-09T19:45:54.209Z",
-            "status": "F",
-            "status_descricao": "Finalizado",
-            "vl_total": 180
-        },
-        {
-            "id_pedido": 2,
-            "cliente": "Fernando",
-            "dt_pedido": "2023-04-09T19:45:54.209Z",
-            "status": "F",
-            "status_descricao": "Finalizado",
-            "vl_total": 1800
-        }
-    ]
+    const [pedidos, setpedidos] = useState([]);
+    const [status,setStatus] =  useState("");
+    function ConsultarPedidos(){
+        setpedidos([
+            {
+                "id_pedido": 1,
+                "cliente": "Marcos",
+                "dt_pedido": "2023-03-09T19:45:54.209Z",
+                "status": "F",
+                "status_descricao": "Finalizado",
+                "vl_total": 180
+            },
+            {
+                "id_pedido": 2,
+                "cliente": "Fernando",
+                "dt_pedido": "2023-04-09T19:45:54.209Z",
+                "status": "F",
+                "status_descricao": "Finalizado",
+                "vl_total": 1800
+            }
+        ]);
+    }
+    useEffect(() =>{
+        ConsultarPedidos();
+    },[]);
     return <>
         <Navbar />
         <div className="container-fluid mt-page form-pedido">
@@ -30,14 +38,14 @@ function Pedidos(){
                     <Link className="btn btn-success ms-5 mb-2" to="/pedidos/novo">Adicionar pedido</Link>
                 </div>
                 <div>
-                    <div className="form-control d-inline me-3">
+                    <div className="form-control d-inline me-3" onChange={(e) => setStatus(e.target.value)}>
                         <select name="status" id="status">
                             <option value="">Status</option>
                             <option value="A">Aberto</option>
                             <option value="F">Finalizado</option>
                         </select>
                     </div>
-                    <button className="btn btn-primary me-4">Filtrar</button>
+                    <button className="btn btn-primary me-4" onClick={ConsultarPedidos}>Filtrar</button>
                 </div>
             </div>
             <div className="mt-5 ms-4 me-4">

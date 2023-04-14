@@ -1,45 +1,73 @@
 import Navbar from "../../components/navbar/navbar.jsx";
 import Grafico from "../../components/grafico/grafico.jsx"
+import { useEffect, useState } from "react";
 function Dashboard(){
-    const dados_clientes = [
-        ["Cliente","Vendas"],
-        ["Microsoft",5200],
-        ["IBM",4900],
-        ["Apple",4200],
-        ["Facebook",3210],
-        ["Google",2140]
+    const [dados_clientes,setDadosClientes] = useState([]);
+    const [dados_vendas,setDadosVendas] = useState([]);
+    const [dados_produto,setDadosProdutos] = useState([]);
+    const [dados_cidade,setDadosCidade] = useState([]);
+    function GraficoClientes(){
+        //Fazer um get no servidor
+        setDadosClientes([
+            ["Cliente","Vendas"],
+            ["Microsoft",5200],
+            ["IBM",4900],
+            ["Apple",4200],
+            ["Facebook",3210],
+            ["Google",2140]
+    
+        ]);
+    }
+    function GraficoVendas(){
+        setDadosVendas(
+            [
+                ["Mês","Vendas"],
+                ["1",5200],
+                ["2",4900],
+                ["3",4200],
+                ["4",3210],
+                ["5",2140],
+                ["6",5200],
+                ["7",4900],
+                ["8",4200],
+                ["9",3210],
+                ["10",2140],
+                ["11",3210],
+                ["12",2140]
+        
+            ]
+        );
+    }
+    function GraficoProdutos(){
+        setDadosProdutos([
+            ["Produto","Vendas"],
+            ["Celular",5200],
+            ["Teclado",4900],
+            ["Monitor",4200],
+            ["HD",3210],
+            ["Webcam",2140]
+        ]);
+    }
+    function GraficoCidade(){
+        setDadosCidade(
+            [
+                ["Cidade","Vendas"],
+                ["Belo jardim",5200],
+                ["Sanharó",4900],
+                ["Pesqueira",4200]
+            ]
+        );
+    }
+    function MontarGrafico(){
+        GraficoClientes();
+        GraficoVendas();
+        GraficoProdutos();
+        GraficoCidade();
 
-    ];
-    const dados_vendas = [
-        ["Mês","Vendas"],
-        ["1",5200],
-        ["2",4900],
-        ["3",4200],
-        ["4",3210],
-        ["5",2140],
-        ["6",5200],
-        ["7",4900],
-        ["8",4200],
-        ["9",3210],
-        ["10",2140],
-        ["11",3210],
-        ["12",2140]
-
-    ];
-    const dados_produto = [
-        ["Produto","Vendas"],
-        ["Celular",5200],
-        ["Teclado",4900],
-        ["Monitor",4200],
-        ["HD",3210],
-        ["Webcam",2140]
-    ];
-    const dados_cidade = [
-        ["Cidade","Vendas"],
-        ["Belo jardim",5200],
-        ["Sanharó",4900],
-        ["Pesqueira",4200]
-    ];
+    }
+    useEffect(() =>{
+        MontarGrafico();
+    },[]);
     return <>
         <Navbar />
         <div className="container-fluid mt-page">
