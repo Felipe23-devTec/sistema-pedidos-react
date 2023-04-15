@@ -1,9 +1,10 @@
 import Navbar from "../../components/navbar/navbar.jsx";
 import "./pedido-editar.css"
-import {Link} from "react-router-dom";
-import{useState} from "react";
+import {Link, useParams} from "react-router-dom";
+import{useEffect, useState} from "react";
 import {v4 as uuidv4} from "uuid"
 function PedidoEditar(){
+    const {id_pedido} = useParams();
 
     const lista_clientes = [
         {
@@ -77,13 +78,25 @@ function PedidoEditar(){
         });
         setProdutos(prod);
     }
+    function CarregarDadosPedido(id_pedido){
+        if(id_pedido > 0){
+            //editando
+        }else{
+            //inserindo
+        }
+    }
+    useEffect(() =>{
+        CarregarDadosPedido(id_pedido);
+    }, []);
     return <>
         <Navbar />
         <div className="container-fluid mt-page form-pedido-editar">
 
             <div className="row col-lg-6 offset-lg-3">
                 <div className="col-12 mb-4 mt-2">
-                    <h2 className="d-inline">Novo Pedido</h2>
+                    <h2 className="d-inline">
+                        {id_pedido > 0 ? "Editar Pedido" + id_pedido : "Novo Pedido"}
+                    </h2>
                 </div>
                 <div className="col-md-8 mb-4">
                     <label htmlFor="ImputNome" className="form-label">Cliente</label>

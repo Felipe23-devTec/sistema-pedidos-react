@@ -10,6 +10,7 @@ function Rotas(){
             <Route path="/" element={<Dashboard/>}></Route>
             <Route path="/pedidos" element={<Pedidos/>}> </Route>
             <Route path="/pedidos/novo" element={<PedidoEditar/>}> </Route>
+            <Route path="/pedidos/editar/:id_pedido" element={<PedidoEditar/>}> </Route>
         </Routes>
     </BrowserRouter>
 }
